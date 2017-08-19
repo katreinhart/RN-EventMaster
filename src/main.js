@@ -87,10 +87,15 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 40,
-    fontSize: 24
+    fontSize: 24,
+    justifyContent: 'center',
+    textAlign: 'center',
+    paddingBottom: 5
   },
   list: {
-    flex: 8
+    flex: 8,
+    borderTopWidth: 1,
+    borderTopColor: '#444'
   },
   row: {
     flex: 1,
