@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 import {
   Image,
   Text,
+  TextInput,
   View,
   StyleSheet,
+  TouchableOpacity,
   Alert,
   ListView
 } from 'react-native';
@@ -25,7 +27,9 @@ export default class App extends Component {
           },
           url: 'www.google.com'
         }
-      ])
+      ]),
+      eventType: '',
+      city: ''
     }
   }
   componentDidMount() {
@@ -70,6 +74,26 @@ export default class App extends Component {
     return(
       <View style={styles.container}>
         <Text style={styles.title}>Event Expert</Text>
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            placeholder='Type of event...'
+            onChangeText={(text) => this.setState({eventType: text})}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='City'
+            onChangeText={(text) => this.setState({city: text})}
+          />
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => this.searchEvents(this.state.eventType, this.state.city)}
+          >
+            <Text style={styles.button}>
+              Search
+            </Text>
+          </TouchableOpacity>
+        </View>
         <ListView
           style={styles.list}
           dataSource={this.state.dataSource}
@@ -84,13 +108,17 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column'
   },
   title: {
     marginTop: 40,
     fontSize: 24,
     justifyContent: 'center',
     textAlign: 'center',
-    paddingBottom: 5
+    paddingBottom: 5,
+  },
+  form: {
+    height: 120
   },
   list: {
     flex: 8,
@@ -115,5 +143,26 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: '#000',
     borderWidth: 1
+  },
+  input: {
+    flex: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    borderWidth: 1,
+    margin: 5,
+    textAlign: 'center',
+  },
+  button: {
+    flex: 1,
+    borderColor: '#00f',
+    borderRadius: 5,
+    borderWidth: 1,
+    textAlign: 'center',
+    padding: 10,
+    margin: 5,
+    color: '#00f'
+  },
+  buttonContainer: {
+    flex: 2
   }
 })
